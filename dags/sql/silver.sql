@@ -23,13 +23,13 @@ INSERT INTO fact_transactions (
 )
 SELECT
     id,
-    "merchantId",
-    "transaction.amount"::double precision,
+    "merchant_id",
+    "txn_amount"::double precision,
     status,
     'PAYIN',
-    "createdOn"::timestamp
+    "created_on"::timestamp
 FROM bronze_payins
-WHERE "createdOn"::timestamp >
+WHERE "created_on"::timestamp >
 (
     SELECT COALESCE(MAX(ts), '1970-01-01')
     FROM fact_transactions
@@ -47,13 +47,13 @@ INSERT INTO fact_transactions (
 )
 SELECT
     id,
-    "merchantId",
-    "transaction.amount"::double precision,
+    "merchant_id",
+    "txn_amount"::double precision,
     status,
     'PAYOUT',
-    "createdOn"::timestamp
+    "created_on"::timestamp
 FROM bronze_payouts
-WHERE "createdOn"::timestamp >
+WHERE "created_on"::timestamp >
 (
     SELECT COALESCE(MAX(ts), '1970-01-01')
     FROM fact_transactions
