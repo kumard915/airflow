@@ -23,7 +23,7 @@ INSERT INTO gold_merchant_pnl (
 SELECT
     m.name,
     m.category,
-    m."kycStatus",
+    m."kyc_status",
     COALESCE(SUM(CASE WHEN f.txn_type = 'PAYIN' THEN f.txn_amount END), 0),
     COALESCE(SUM(CASE WHEN f.txn_type = 'PAYOUT' THEN f.txn_amount END), 0),
     COUNT(*)
@@ -33,5 +33,5 @@ JOIN bronze_merchants m
 GROUP BY
     m.name,
     m.category,
-    m."kycStatus";
+    m."kyc_status";
 
